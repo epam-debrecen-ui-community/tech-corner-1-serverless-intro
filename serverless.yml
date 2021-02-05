@@ -1,0 +1,30 @@
+# Yeah nah, don't deploy to my org. You can't anyway.
+# app: intro-to-serverless
+# org: attilagyongyosi
+
+service: express-api
+
+plugins:
+    - serverless-offline
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: '2'
+
+provider:
+    name: aws
+
+    # AWS Lambda supports Node.js 14. You _can_ specify 'nodejs14.x' as
+    # a value here. Serverless will throw a warning during deployment, but
+    # it will work up on AWS.
+    runtime: nodejs12.x
+    lambdaHashingVersion: 20201221
+    region: eu-central-1
+    stage: dev
+
+functions:
+    api:
+        handler: src/app.handler
+        events:
+            - http: ANY /api
+            - http: 'ANY {proxy+}' # this will proxy all incoming HTTP requests to your Lambda function
