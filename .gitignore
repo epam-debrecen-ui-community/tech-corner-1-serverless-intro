@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+
+# Serverless artifacts
+.serverless/
+
+# IDE
+.idea/
+*.iml
